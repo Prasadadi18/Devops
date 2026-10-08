@@ -4,14 +4,17 @@ pipeline {
     stages {
 
         stage('Build') {
-            steps {
-                echo 'Installing dependencies...'
-                sh '''
-                    cd Assignment9/python-flask-app
-                    python3 -m pip install -r requirements.txt
-                '''
-            }
-        }
+    steps {
+        echo 'Checking workspace...'
+        sh '''
+            pwd
+            echo "===== WORKSPACE ====="
+            ls -la
+            echo "===== FILES ====="
+            find . -maxdepth 3 -type f
+        '''
+    }
+}
 
         stage('Test') {
             steps {
