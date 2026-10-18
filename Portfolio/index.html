@@ -1,0 +1,2475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adi Narayan Prasad | Portfolio</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #6366f1;
+            --accent2: #22d3ee;
+            --text: #e2e8f0;
+            --text-muted: #94a3b8;
+            --card-bg: #1e293b;
+            --border: #334155;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--primary); }
+        ::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+        .nav-links a:hover::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--text);
+            transition: all 0.3s;
+            display: block;
+        }
+
+        /* ===== HERO ===== */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 6rem 2rem 2rem;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(34,211,238,0.1) 0%, transparent 60%);
+        }
+
+        .particles {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: floatUp linear infinite;
+            opacity: 0.4;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.4; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+        }
+
+        .hero-content {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-greeting {
+            font-size: 1rem;
+            color: var(--accent2);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .hero-name {
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease 0.2s forwards;
+            opacity: 0;
+        }
+
+        .hero-name span {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            min-height: 2rem;
+            animation: fadeInUp 0.8s ease 0.4s forwards;
+            opacity: 0;
+        }
+
+        .typed-text {
+            color: var(--accent2);
+            border-right: 2px solid var(--accent2);
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { border-color: transparent; }
+            50% { border-color: var(--accent2); }
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+            opacity: 0;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #818cf8);
+            color: white;
+            box-shadow: 0 4px 20px rgba(99,102,241,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99,102,241,0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .hero-social {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2.5rem;
+            animation: fadeInUp 0.8s ease 0.8s forwards;
+            opacity: 0;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(99,102,241,0.3);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== SECTIONS ===== */
+        section { padding: 5rem 2rem; }
+
+        .container { max-width: 1100px; margin: 0 auto; }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title span {
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-line {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            margin: 0 auto 3rem;
+            border-radius: 2px;
+        }
+
+        /* ===== ABOUT ===== */
+        #about { background: var(--secondary); }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-avatar { display: flex; justify-content: center; }
+
+        .avatar-ring {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            animation: rotateSlow 8s linear infinite;
+        }
+
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            animation: rotateSlow 8s linear infinite reverse;
+        }
+
+        .about-text h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--accent2); }
+        .about-text p { color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
+
+        .about-info { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+        .info-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; }
+        .info-item i { color: var(--accent); width: 16px; }
+        .info-item span { color: var(--text-muted); }
+
+        /* ===== SKILLS ===== */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+
+        .skill-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(99,102,241,0.15);
+        }
+
+        .skill-card h3 {
+            font-size: 1rem;
+            color: var(--accent2);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+        .skill-tag {
+            background: rgba(99,102,241,0.15);
+            border: 1px solid rgba(99,102,241,0.3);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .skill-tag:hover { background: var(--accent); color: white; }
+
+        /* ===== EXPERIENCE ===== */
+        #experience { background: var(--secondary); }
+
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent), var(--accent2));
+        }
+
+        .timeline-item { position: relative; padding-left: 80px; margin-bottom: 3rem; }
+
+        .timeline-dot {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--primary);
+            box-shadow: 0 0 0 3px var(--accent);
+        }
+
+        .timeline-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .timeline-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 25px rgba(99,102,241,0.15);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-title { font-size: 1.05rem; font-weight: 700; }
+        .timeline-company { color: var(--accent2); font-size: 0.9rem; margin-bottom: 0.3rem; }
+
+        .timeline-date {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+            background: rgba(99,102,241,0.1);
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .timeline-card ul { list-style: none; margin-top: 0.8rem; }
+
+        .timeline-card ul li {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            line-height: 1.6;
+            padding-left: 1rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-card ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* ===== PROJECTS ===== */
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover::before { transform: scaleX(1); }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(99,102,241,0.2);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 10px;
+            background: rgba(99,102,241,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .project-links { display: flex; gap: 0.5rem; }
+
+        .project-link {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            background: transparent;
+            cursor: pointer;
+        }
+
+        .project-link:hover { border-color: var(--accent); color: var(--accent); }
+
+        .project-title { font-size: 1rem; font-weight: 700; margin-bottom: 0.6rem; }
+
+        .project-desc { color: var(--text-muted); font-size: 0.85rem; line-height: 1.6; margin-bottom: 1rem; }
+
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+        .tech-tag {
+            background: rgba(34,211,238,0.1);
+            border: 1px solid rgba(34,211,238,0.2);
+            color: var(--accent2);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        /* ===== EDUCATION ===== */
+        #education { background: var(--secondary); }
+
+        .education-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+
+        .edu-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .edu-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(99,102,241,0.15);
+        }
+
+        .edu-icon { font-size: 2rem; margin-bottom: 1rem; }
+        .edu-degree { font-size: 0.9rem; color: var(--accent2); margin-bottom: 0.3rem; }
+        .edu-school { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+        .edu-location { color: var(--text-muted); font-size: 0.82rem; margin-bottom: 0.8rem; }
+
+        .edu-footer { display: flex; justify-content: space-between; align-items: center; }
+
+        .edu-year { color: var(--text-muted); font-size: 0.82rem; }
+
+        .edu-score {
+            background: rgba(99,102,241,0.15);
+            color: var(--accent);
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.82rem;
+            font-weight: 600;
+        }
+
+        /* ===== CERTIFICATIONS ===== */
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+
+        .cert-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .cert-card:hover { border-color: var(--accent); transform: translateX(5px); }
+
+        .cert-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cert-name { font-size: 0.88rem; font-weight: 600; }
+        .cert-issuer { color: var(--text-muted); font-size: 0.78rem; }
+
+        /* ===== CONTACT ===== */
+        #contact { background: var(--secondary); }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 { font-size: 1.4rem; margin-bottom: 0.8rem; }
+        .contact-info p { color: var(--text-muted); line-height: 1.7; margin-bottom: 2rem; }
+
+        .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item:hover { color: var(--accent); }
+
+        .contact-item-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: rgba(99,102,241,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+
+        .form-group label { font-size: 0.85rem; color: var(--text-muted); }
+
+        .form-group input,
+        .form-group textarea {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+            color: var(--text);
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus { border-color: var(--accent); }
+
+        .form-group textarea { height: 120px; resize: vertical; }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        footer span { color: var(--accent); }
+
+        /* ===== BACK TO TOP ===== */
+        .back-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s;
+            z-index: 999;
+        }
+
+        .back-top.show { opacity: 1; pointer-events: all; }
+
+        .back-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(99,102,241,0.5);
+        }
+
+        /* ===== REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ============================================================
+           MODAL STYLES
+        ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 1rem;
+        }
+
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+
+        .modal-box {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 860px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.85) translateY(30px);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-box { transform: scale(1) translateY(0); }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: #0f172a;
+            z-index: 10;
+            border-radius: 16px 16px 0 0;
+        }
+
+        .modal-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #6366f1, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-subtitle { font-size: 0.75rem; color: #94a3b8; margin-top: 0.2rem; }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid #334155;
+            background: transparent;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .modal-close:hover { border-color: #ef4444; color: #ef4444; transform: rotate(90deg); }
+
+        .modal-body { padding: 2rem; }
+
+        /* Tabs */
+        .sim-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+
+        .sim-tab {
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #334155;
+            background: transparent;
+            color: #94a3b8;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .sim-tab.active { background: #6366f1; border-color: #6366f1; color: white; }
+        .sim-tab:hover:not(.active) { border-color: #6366f1; color: #6366f1; }
+
+        /* Controls */
+        .sim-controls { display: flex; gap: 0.8rem; margin-top: 1rem; flex-wrap: wrap; }
+
+        .sim-btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .sim-btn:hover { transform: translateY(-1px); }
+
+        .sim-btn-green { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.4); color: #22c55e; }
+        .sim-btn-green:hover { background: rgba(34,197,94,0.3); }
+        .sim-btn-red { background: rgba(239,68,68,0.15); border: 1px solid rgba(239,68,68,0.4); color: #ef4444; }
+        .sim-btn-red:hover { background: rgba(239,68,68,0.3); }
+        .sim-btn-blue { background: rgba(99,102,241,0.15); border: 1px solid rgba(99,102,241,0.4); color: #6366f1; }
+        .sim-btn-blue:hover { background: rgba(99,102,241,0.3); }
+        .sim-btn-gray { background: rgba(100,100,100,0.15); border: 1px solid #334155; color: #94a3b8; }
+        .sim-btn-gray:hover { background: rgba(100,100,100,0.3); }
+
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-running { background: rgba(34,197,94,0.15); border: 1px solid rgba(34,197,94,0.3); color: #22c55e; }
+        .status-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: blinkDot 1s infinite; }
+
+        @keyframes blinkDot { 0%,100%{opacity:1;} 50%{opacity:0.2;} }
+
+        /* Log area */
+        .log-area {
+            background: #020617;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 1rem;
+            height: 140px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .log-line { padding: 0.15rem 0; animation: fadeLogIn 0.3s ease; }
+
+        @keyframes fadeLogIn { from{opacity:0;transform:translateX(-8px);} to{opacity:1;transform:translateX(0);} }
+
+        .log-info  { color: #22d3ee; }
+        .log-warn  { color: #f59e0b; }
+        .log-danger{ color: #ef4444; }
+        .log-success{color: #22c55e; }
+        .log-llm   { color: #a78bfa; }
+
+        /* Network canvas */
+        .network-canvas {
+            position: relative;
+            height: 280px;
+            background: #020617;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #1e293b;
+        }
+
+        .net-node {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            border: 2px solid;
+            transition: all 0.3s;
+            z-index: 5;
+        }
+
+        .net-node-normal { background: rgba(99,102,241,0.2); border-color: #6366f1; box-shadow: 0 0 12px rgba(99,102,241,0.4); }
+        .net-node-threat { background: rgba(239,68,68,0.2); border-color: #ef4444; box-shadow: 0 0 18px rgba(239,68,68,0.7); animation: pulseRed 0.8s infinite; }
+        .net-node-blocked { background: rgba(107,114,128,0.2); border-color: #6b7280; opacity: 0.45; }
+        .net-node-safe { background: rgba(34,197,94,0.2); border-color: #22c55e; box-shadow: 0 0 12px rgba(34,197,94,0.4); }
+
+        @keyframes pulseRed { 0%,100%{box-shadow:0 0 18px rgba(239,68,68,0.7);} 50%{box-shadow:0 0 36px rgba(239,68,68,1);} }
+
+        .net-label {
+            position: absolute;
+            bottom: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.6rem;
+            color: #94a3b8;
+            white-space: nowrap;
+            font-family: 'Courier New', monospace;
+        }
+
+        .packet-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        /* IDS Bars */
+        .bar-group { display: flex; flex-direction: column; gap: 0.6rem; }
+
+        .bar-item { display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; }
+
+        .bar-label { color: #94a3b8; width: 85px; flex-shrink: 0; font-size: 0.68rem; }
+
+        .bar-track { flex: 1; height: 9px; background: #1e293b; border-radius: 4px; overflow: hidden; }
+
+        .bar-fill { height: 100%; border-radius: 4px; width: 0%; transition: width 1s ease; }
+
+        .bar-val { color: #e2e8f0; font-size: 0.68rem; width: 38px; text-align: right; }
+
+        /* IDS grid */
+        .ids-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+        .ids-chart { background: #020617; border: 1px solid #1e293b; border-radius: 8px; padding: 1rem; }
+        .ids-chart h4 { font-size: 0.78rem; color: #94a3b8; margin-bottom: 1rem; text-align: center; }
+
+        .attack-stream { display: flex; flex-direction: column; gap: 0.35rem; height: 200px; overflow-y: auto; }
+
+        .attack-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0f172a;
+            border-radius: 5px;
+            padding: 0.35rem 0.7rem;
+            font-size: 0.7rem;
+            animation: slideDownIn 0.3s ease;
+            border-left: 3px solid;
+        }
+
+        @keyframes slideDownIn { from{opacity:0;transform:translateY(-8px);} to{opacity:1;transform:translateY(0);} }
+
+        .attack-badge {
+            padding: 0.1rem 0.45rem;
+            border-radius: 3px;
+            font-size: 0.62rem;
+            font-weight: 700;
+        }
+
+        /* Model cards */
+        .model-comparison { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px,1fr)); gap: 0.5rem; margin-top: 1rem; }
+
+        .model-card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 8px;
+            padding: 0.8rem;
+            text-align: center;
+            font-size: 0.7rem;
+            transition: all 0.3s;
+        }
+
+        .model-card.winner { border-color: #22c55e; box-shadow: 0 0 12px rgba(34,197,94,0.2); }
+        .model-name { font-weight: 700; margin-bottom: 0.3rem; font-size: 0.72rem; }
+        .model-score { font-size: 1.1rem; font-weight: 800; }
+
+        /* GREEN-AI */
+        .green-dashboard { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+
+        .green-metric { background: #0f172a; border: 1px solid #1e293b; border-radius: 10px; padding: 1rem; text-align: center; }
+        .green-metric-val { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.2rem; }
+        .green-metric-label { font-size: 0.68rem; color: #94a3b8; }
+
+        .query-flow { display: flex; flex-direction: column; gap: 0.4rem; max-height: 200px; overflow-y: auto; }
+
+        .query-item {
+            background: #0f172a;
+            border-radius: 7px;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.72rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            animation: fadeLogIn 0.4s ease;
+            border: 1px solid #1e293b;
+        }
+
+        .query-model-badge {
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.62rem;
+            font-weight: 700;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+
+        .badge-light { background: rgba(34,197,94,0.2); color: #22c55e; border: 1px solid rgba(34,197,94,0.3); }
+        .badge-heavy { background: rgba(239,68,68,0.2); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+
+        /* stat grid */
+        .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 1rem; }
+
+        .stat-item { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 0.8rem; display: flex; align-items: center; gap: 0.8rem; }
+        .stat-icon { font-size: 1.3rem; }
+        .stat-val { font-size: 1rem; font-weight: 700; color: #22d3ee; }
+        .stat-name { font-size: 0.68rem; color: #94a3b8; }
+
+        /* Region grid */
+        .region-card {
+            background: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 10px;
+            padding: 0.8rem;
+            text-align: center;
+            transition: all 0.3s;
+            font-size: 0.75rem;
+        }
+
+        /* Sim screen (terminal) */
+        .sim-screen {
+            background: #020617;
+            border-radius: 10px;
+            border: 1px solid #1e293b;
+            padding: 1.2rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.78rem;
+            min-height: 220px;
+            overflow-y: auto;
+        }
+
+        /* Pipeline steps */
+        .pipeline-step {
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 0.7rem 1rem;
+            animation: fadeLogIn 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 3px solid;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Scrollbar inside modal */
+        .modal-box::-webkit-scrollbar { width: 4px; }
+        .modal-box::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+        .log-area::-webkit-scrollbar { width: 3px; }
+        .log-area::-webkit-scrollbar-thumb { background: #334155; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--secondary);
+                width: 200px;
+                padding: 2rem;
+                transition: right 0.3s;
+                border-left: 1px solid var(--border);
+                height: 100vh;
+            }
+            .nav-links.open { right: 0; }
+            .about-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .avatar-ring { width: 180px; height: 180px; }
+            .ids-grid { grid-template-columns: 1fr; }
+            .green-dashboard { grid-template-columns: 1fr 1fr; }
+            .modal-body { padding: 1rem; }
+            .modal-header { padding: 1rem; }
+            .stat-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .green-dashboard { grid-template-columns: 1fr; }
+            .model-comparison { grid-template-columns: repeat(3,1fr); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav id="navbar">
+    <div class="nav-logo">ANP</div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+    <div class="hero-bg"></div>
+    <div class="particles" id="particles"></div>
+    <div class="hero-content">
+        <p class="hero-greeting">👋 Hello, I'm</p>
+        <h1 class="hero-name">Adi Narayan <span>Prasad</span></h1>
+        <p class="hero-tagline"><span class="typed-text" id="typed"></span></p>
+        <div class="hero-btns">
+            <a href="#projects" class="btn btn-primary"><i class="fas fa-code"></i> View Projects</a>
+            <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Contact Me</a>
+            <a href="Adi_Resume.pdf" download="Adi_Narayan_Prasad_Resume.pdf" class="btn btn-outline"><i class="fas fa-download"></i> Resume</a>
+        </div>
+        <div class="hero-social">
+            <a href="mailto:adinarayan736@gmail.com" class="social-link" title="Email"><i class="fas fa-envelope"></i></a>
+            <a href="https://linkedin.com" target="_blank" class="social-link" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com" target="_blank" class="social-link" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="tel:+919019047149" class="social-link" title="Phone"><i class="fas fa-phone"></i></a>
+        </div>
+    </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about">
+    <div class="container">
+        <h2 class="section-title reveal">About <span>Me</span></h2>
+        <div class="section-line reveal"></div>
+        <div class="about-grid">
+            <div class="about-avatar reveal">
+                <div class="avatar-ring">
+                    <div class="avatar-inner">👨‍💻</div>
+                </div>
+            </div>
+            <div class="about-text reveal">
+                <h3>Aspiring Software Developer</h3>
+                <p>I'm a passionate Information Science Engineering student at BMS College of Engineering with expertise in Python, Machine Learning, and Computer Networks. I focus on designing scalable systems and solving complex engineering problems in real-world applications.</p>
+                <p>Recently interned at <strong style="color:var(--accent2)">Hewlett Packard Enterprise (HPE)</strong> and currently working as a research intern at <strong style="color:var(--accent2)">Carnegie Mellon University (CMU)</strong> on high-performance sketching and approximate analytics frameworks.</p>
+                <div class="about-info">
+                    <div class="info-item"><i class="fas fa-graduation-cap"></i><span>B.E. Information Science</span></div>
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i><span>Bengaluru, Karnataka</span></div>
+                    <div class="info-item"><i class="fas fa-star"></i><span>CGPA: 8.8</span></div>
+                    <div class="info-item"><i class="fas fa-briefcase"></i><span>Open to Opportunities</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills">
+    <div class="container">
+        <h2 class="section-title reveal">Technical <span>Skills</span></h2>
+        <div class="section-line reveal"></div>
+        <div class="skills-grid">
+            <div class="skill-card reveal">
+                <h3><i class="fas fa-code"></i> Programming Languages</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span><span class="skill-tag">SQL</span>
+                    <span class="skill-tag">JavaScript</span><span class="skill-tag">HTML/CSS</span>
+                    <span class="skill-tag">Bash</span>
+                </div>
+            </div>
+            <div class="skill-card reveal">
+                <h3><i class="fas fa-brain"></i> ML & Data Science</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Supervised Learning</span><span class="skill-tag">Sklearn</span>
+                    <span class="skill-tag">XGBoost</span><span class="skill-tag">Pandas</span>
+                    <span class="skill-tag">DistilGPT</span><span class="skill-tag">Llama LLM</span>
+                </div>
+            </div>
+            <div class="skill-card reveal">
+                <h3><i class="fas fa-tools"></i> Tools & Systems</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git</span><span class="skill-tag">Docker</span>
+                    <span class="skill-tag">HashiCorp Vault</span><span class="skill-tag">Mininet</span>
+                    <span class="skill-tag">VS Code</span><span class="skill-tag">Linux</span>
+                </div>
+            </div>
+            <div class="skill-card reveal">
+                <h3><i class="fas fa-network-wired"></i> Databases & Networking</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">MongoDB</span><span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Scapy</span><span class="skill-tag">Wireshark</span>
+                    <span class="skill-tag">Computer Networks</span>
+                </div>
+            </div>
+            <div class="skill-card reveal">
+                <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Google Cloud</span><span class="skill-tag">Carbon Tracking</span>
+                    <span class="skill-tag">Blackhole Routing</span><span class="skill-tag">ETL Pipelines</span>
+                </div>
+            </div>
+            <div class="skill-card reveal">
+                <h3><i class="fas fa-heart"></i> Soft Skills</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Problem Solving</span><span class="skill-tag">System Design</span>
+                    <span class="skill-tag">Team Collaboration</span><span class="skill-tag">Debugging Mindset</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience">
+    <div class="container">
+        <h2 class="section-title reveal">Work <span>Experience</span></h2>
+        <div class="section-line reveal"></div>
+        <div class="timeline">
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-title">Project Intern</div>
+                            <div class="timeline-company"><i class="fas fa-building"></i> Hewlett Packard Enterprise (HPE)</div>
+                            <div style="color:var(--text-muted);font-size:0.82rem;"><i class="fas fa-map-marker-alt"></i> Bengaluru</div>
+                        </div>
+                        <span class="timeline-date">Feb 2026 – June 2026</span>
+                    </div>
+                    <ul>
+                        <li>Engineered the core data ingestion pipeline for an HPE threat detection system, managing raw network datasets and streaming them in real time.</li>
+                        <li>Configured and containerized Zeek, Elastic Beats, Elasticsearch, and Apache Kafka using Docker Compose to collect, index, and safely buffer over 100K network event logs.</li>
+                        <li>Set up secure public network tunnels using ngrok, creating a live login gateway so team members and stakeholders could easily access and verify the system.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="timeline-item reveal">
+                <div class="timeline-dot"></div>
+                <div class="timeline-card">
+                    <div class="timeline-header">
+                        <div>
+                            <div class="timeline-title">Research Intern</div>
+                            <div class="timeline-company"><i class="fas fa-building"></i> Carnegie Mellon University (CMU)</div>
+                            <div style="color:var(--text-muted);font-size:0.82rem;"><i class="fas fa-map-marker-alt"></i> Bengaluru</div>
+                        </div>
+                        <span class="timeline-date">June 2026 – Present</span>
+                    </div>
+                    <ul>
+                        <li>Designing an open-source benchmarking framework to evaluate the performance, speed, and cost efficiency of sketching data structures against traditional database queries.</li>
+                        <li>Developing a real-time leaderboard to track and compare metrics like accuracy, memory usage, and query processing time across various large-scale datasets.</li>
+                        <li>Implementing and testing core sketching algorithms (such as HyperLogLog and Count-Min Sketch) to optimize approximate analytics for high-volume data streams.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== PROJECTS ===== -->
+<section id="projects">
+    <div class="container">
+        <h2 class="section-title reveal">Featured <span>Projects</span></h2>
+        <div class="section-line reveal"></div>
+        <div class="projects-grid">
+
+            <div class="project-card reveal">
+                <div class="project-header">
+                    <div class="project-icon">🌐</div>
+                    <div class="project-links">
+                        <button class="project-link" onclick="openModal('modal-network')" title="View Live Simulation">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <a href="#" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="project-title">LLM-Driven Autonomous Network Monitoring</div>
+                <p class="project-desc">Real-time network monitor using Scapy & Wireshark to capture telemetry and simulate multi-vector attacks. Integrated Llama LLM for automated root-cause analysis and Blackhole Routing for instant threat isolation.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Python</span><span class="tech-tag">Scapy</span>
+                    <span class="tech-tag">Llama</span><span class="tech-tag">Wireshark</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal">
+                <div class="project-header">
+                    <div class="project-icon">🛡️</div>
+                    <div class="project-links">
+                        <button class="project-link" onclick="openModal('modal-ids')" title="View Live Simulation">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <a href="#" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="project-title">Intrusion Detection System</div>
+                <p class="project-desc">ML pipeline to detect 11 types of network attacks, benchmarking 7 different models. Engineered an ETL pipeline to process raw traffic data, converting complex behavioral features into ML-ready formats.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">Sklearn</span><span class="tech-tag">XGBoost</span>
+                    <span class="tech-tag">Pandas</span><span class="tech-tag">Python</span>
+                </div>
+            </div>
+
+            <div class="project-card reveal">
+                <div class="project-header">
+                    <div class="project-icon">🌱</div>
+                    <div class="project-links">
+                        <button class="project-link" onclick="openModal('modal-green')" title="View Live Simulation">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <a href="#" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="project-title">Sustainable LLM Optimization (GREEN-AI)</div>
+                <p class="project-desc">Designed a "Smart Switch" to dynamically route queries between lightweight and large LLMs to reduce compute costs. Integrated Carbon Tracking to measure CO₂ emissions per inference.</p>
+                <div class="project-tech">
+                    <span class="tech-tag">DistilGPT</span><span class="tech-tag">Carbon Tracking</span>
+                    <span class="tech-tag">Python</span><span class="tech-tag">Cloud</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section id="education">
+    <div class="container">
+        <h2 class="section-title reveal">My <span>Education</span></h2>
+        <div class="section-line reveal"></div>
+        <div class="education-grid">
+            <div class="edu-card reveal">
+                <div class="edu-icon">🎓</div>
+                <div class="edu-degree">Bachelor of Engineering – Information Science</div>
+                <div class="edu-school">BMS College of Engineering</div>
+                <div class="edu-location">📍 Bengaluru, Karnataka</div>
+                <div class="edu-footer">
+                    <span class="edu-year">2023 – Present</span>
+                    <span class="edu-score">CGPA: 8.8</span>
+                </div>
+            </div>
+            <div class="edu-card reveal">
+                <div class="edu-icon">📚</div>
+                <div class="edu-degree">Pre-University Course (PCMB)</div>
+                <div class="edu-school">BGS PU College</div>
+                <div class="edu-location">📍 Ramanagara, Karnataka</div>
+                <div class="edu-footer">
+                    <span class="edu-year">2021 – 2023</span>
+                    <span class="edu-score">95%</span>
+                </div>
+            </div>
+            <div class="edu-card reveal">
+                <div class="edu-icon">🏫</div>
+                <div class="edu-degree">SSLC</div>
+                <div class="edu-school">Vasavi Vidyanikethan</div>
+                <div class="edu-location">📍 Ramanagara, Karnataka</div>
+                <div class="edu-footer">
+                    <span class="edu-year">2011 – 2021</span>
+                    <span class="edu-score">99%</span>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title reveal" style="margin-top:4rem;">My <span>Certifications</span></h2>
+        <div class="section-line reveal"></div>
+        <div class="cert-grid">
+            <div class="cert-card reveal">
+                <div class="cert-icon"><i class="fas fa-certificate" style="color:white"></i></div>
+                <div><div class="cert-name">Supervised Machine Learning</div><div class="cert-issuer">DeepLearning.AI</div></div>
+            </div>
+            <div class="cert-card reveal">
+                <div class="cert-icon"><i class="fab fa-google" style="color:white"></i></div>
+                <div><div class="cert-name">Google Cloud Engineering</div><div class="cert-issuer">Google Cloud</div></div>
+            </div>
+            <div class="cert-card reveal">
+                <div class="cert-icon"><i class="fas fa-code" style="color:white"></i></div>
+                <div><div class="cert-name">DSA in Python</div><div class="cert-issuer">NPTEL</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact">
+    <div class="container">
+        <h2 class="section-title reveal">Get In <span>Touch</span></h2>
+        <div class="section-line reveal"></div>
+        <div class="contact-grid">
+            <div class="contact-info reveal">
+                <h3>Let's Connect!</h3>
+                <p>I'm currently open to internship opportunities, collaborations, and exciting projects. Whether you have a question or just want to say hi, feel free to reach out!</p>
+                <div class="contact-items">
+                    <a href="mailto:adinarayan736@gmail.com" class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-envelope"></i></div>
+                        <span>adinarayan736@gmail.com</span>
+                    </a>
+                    <a href="tel:+919019047149" class="contact-item">
+                        <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+                        <span>+91-9019047149</span>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" class="contact-item">
+                        <div class="contact-item-icon"><i class="fab fa-linkedin-in"></i></div>
+                        <span>LinkedIn Profile</span>
+                    </a>
+                    <a href="https://github.com" target="_blank" class="contact-item">
+                        <div class="contact-item-icon"><i class="fab fa-github"></i></div>
+                        <span>GitHub Profile</span>
+                    </a>
+                </div>
+            </div>
+            <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input id="contactName" name="name" type="text" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                    <label>Your Email</label>
+                    <input id="contactEmail" name="email" type="email" placeholder="john@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Subject</label>
+                    <input id="contactSubject" name="subject" type="text" placeholder="Internship Opportunity" required>
+                </div>
+                <div class="form-group">
+                    <label>Message</label>
+                    <textarea id="contactMessage" name="message" placeholder="Your message here..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+    <p>Designed & Built by <span>Adi Narayan Prasad</span></p>
+    
+</footer>
+
+<!-- ===== BACK TO TOP ===== -->
+<button class="back-top" id="backTop" onclick="scrollToTop()">
+    <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- ============================================================
+     MODAL 1 — LLM-Driven Network Monitoring
+============================================================ -->
+<div class="modal-overlay" id="modal-network" onclick="closeModalOutside(event,'modal-network')">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div>
+                <div class="modal-title">🌐 LLM-Driven Autonomous Network Monitoring</div>
+                <div class="modal-subtitle">Interactive simulation — topology, packet capture & LLM analysis</div>
+            </div>
+            <button class="modal-close" onclick="closeModal('modal-network')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="sim-tabs">
+                <button class="sim-tab active" id="net-tab-topology" onclick="netTab('topology')">🗺️ Network Topology</button>
+                <button class="sim-tab" id="net-tab-packets"  onclick="netTab('packets')">📦 Packet Stream</button>
+                <button class="sim-tab" id="net-tab-llm"     onclick="netTab('llm')">🤖 LLM Analysis</button>
+            </div>
+
+            <!-- Topology -->
+            <div id="net-topology">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.5rem;">
+                    <span class="status-badge status-running"><span class="status-dot"></span> Monitor Ready</span>
+                    <span id="threatBadge" style="font-size:0.8rem;color:#ef4444;font-weight:600;">Threats Detected: 0</span>
+                </div>
+                <div class="network-canvas" id="networkCanvas">
+                    <svg id="networkSVG" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;"></svg>
+                </div>
+                <div class="sim-controls">
+                    <button class="sim-btn sim-btn-green" onclick="startNetMonitor()">▶ Start Monitor</button>
+                    <button class="sim-btn sim-btn-red"   onclick="simulateAttack()">⚡ Simulate Attack</button>
+                    <button class="sim-btn sim-btn-blue"  onclick="blockThreats()">🛡 Block Threats</button>
+                    <button class="sim-btn sim-btn-gray"  onclick="resetNetwork()">🔄 Reset</button>
+                </div>
+                <div class="log-area" id="netLog">
+                    <div class="log-line log-info">[SYSTEM] Network Monitor initialized — click ▶ Start Monitor</div>
+                </div>
+            </div>
+
+            <!-- Packets -->
+            <div id="net-packets" style="display:none;">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem;flex-wrap:wrap;gap:0.5rem;">
+                    <span style="font-size:0.8rem;color:#94a3b8;">Scapy live packet capture simulation</span>
+                    <span class="status-badge status-running"><span class="status-dot"></span> Interface: eth0</span>
+                </div>
+                <div class="sim-screen" style="min-height:260px;">
+                    <div style="color:#22d3ee;margin-bottom:0.5rem;">$ sudo python3 -c "from scapy.all import sniff; sniff(prn=lambda p:p.show())"</div>
+                    <div id="packetStream" style="max-height:220px;overflow-y:auto;"></div>
+                </div>
+                <div class="sim-controls">
+                    <button class="sim-btn sim-btn-green" onclick="startPacketStream()">▶ Start Capture</button>
+                    <button class="sim-btn sim-btn-red"   onclick="stopPacketStream()">⏹ Stop</button>
+                </div>
+            </div>
+
+            <!-- LLM -->
+            <div id="net-llm" style="display:none;">
+                <div style="display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap;">
+                    <div style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:0.8rem;flex:1;min-width:130px;">
+                        <div style="font-size:0.68rem;color:#94a3b8;">Model</div>
+                        <div style="font-size:0.9rem;font-weight:700;color:#a78bfa;">Llama 3.1 70B</div>
+                    </div>
+                    <div style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:0.8rem;flex:1;min-width:130px;">
+                        <div style="font-size:0.68rem;color:#94a3b8;">Response Time</div>
+                        <div style="font-size:0.9rem;font-weight:700;color:#22d3ee;" id="llmTime">—</div>
+                    </div>
+                    <div style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:0.8rem;flex:1;min-width:130px;">
+                        <div style="font-size:0.68rem;color:#94a3b8;">Confidence</div>
+                        <div style="font-size:0.9rem;font-weight:700;color:#22c55e;" id="llmConf">—</div>
+                    </div>
+                </div>
+                <div class="sim-screen" id="llmScreen">
+                    <div style="color:#94a3b8;text-align:center;padding:3rem 0;">Select an attack type below to run LLM root-cause analysis</div>
+                </div>
+                <div class="sim-controls">
+                    <button class="sim-btn sim-btn-red"  onclick="runLLMAnalysis('syn')">⚡ SYN Flood</button>
+                    <button class="sim-btn sim-btn-blue" onclick="runLLMAnalysis('port')">🔍 Port Scan</button>
+                    <button class="sim-btn sim-btn-green"onclick="runLLMAnalysis('icmp')">📡 ICMP Flood</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     MODAL 2 — Intrusion Detection System
+============================================================ -->
+<div class="modal-overlay" id="modal-ids" onclick="closeModalOutside(event,'modal-ids')">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div>
+                <div class="modal-title">🛡️ Intrusion Detection System</div>
+                <div class="modal-subtitle">ML pipeline — 11 attack types, 7 model benchmark, live ETL</div>
+            </div>
+            <button class="modal-close" onclick="closeModal('modal-ids')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="sim-tabs">
+                <button class="sim-tab active" id="ids-tab-benchmark" onclick="idsTab('benchmark')">📊 Model Benchmark</button>
+                <button class="sim-tab" id="ids-tab-detect"    onclick="idsTab('detect')">🔍 Live Detection</button>
+                <button class="sim-tab" id="ids-tab-pipeline"  onclick="idsTab('pipeline')">⚙️ ETL Pipeline</button>
+            </div>
+
+            <!-- Benchmark -->
+            <div id="ids-benchmark">
+                <div style="font-size:0.8rem;color:#94a3b8;margin-bottom:1rem;">Accuracy of 7 ML models on NSL-KDD intrusion dataset</div>
+                <div class="bar-group" id="modelBars"></div>
+                <div class="model-comparison" id="modelCards"></div>
+                <div class="sim-controls">
+                    <button class="sim-btn sim-btn-green" onclick="runBenchmark()">▶ Run Benchmark</button>
+                    <button class="sim-btn sim-btn-gray"  onclick="resetBenchmark()">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Detect -->
+            <div id="ids-detect" style="display:none;">
+                <div class="ids-grid">
+                    <div class="ids-chart">
+                        <h4>Attack Distribution</h4>
+                        <div class="bar-group" id="attackBars"></div>
+                    </div>
+                    <div class="ids-chart">
+                        <h4>Live Traffic Feed</h4>
+                        <div class="attack-stream" id="attackStream"></div>
+                    </div>
+                </div>
+                <div style="margin-top:1rem;display:flex;gap:1rem;flex-wrap:wrap;">
+                    <div style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:0.7rem 1rem;flex:1;min-width:100px;text-align:center;">
+                        <div style="font-size:1.3rem;font-weight:800;color:#22c55e;" id="ids-total">0</div>
+                        <div style="font-size:0.65rem;color:#94a3b8;">Total Packets</div>
+                    </div>
+                    <div style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:0.7rem 1rem;flex:1;min-width:100px;text-align:center;">
+                        <div style="font-size:1.3rem;font-weight:800;color:#ef4444;" id="ids-attacks">0</div>
+                        <div style="font-size:0.65rem;color:#94a3b8;">Attacks Blocked</div>
+                    </div>
+                    <div style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:0.7rem 1rem;flex:1;min-width:100px;text-align:center;">
+                        <div style="font-size:1.3rem;font-weight:800;color:#22d3ee;" id="ids-acc">99.2%</div>
+                        <div style="font-size:0.65rem;color:#94a3b8;">Model Accuracy</div>
+                    </div>
+                </div>
+                <div class="sim-controls">
+                    <button class="sim-btn sim-btn-green" onclick="startDetection()">▶ Start Detection</button>
+                    <button class="sim-btn sim-btn-red"   onclick="stopDetection()">⏹ Stop</button>
+                </div>
+            </div>
+
+            <!-- Pipeline -->
+            <div id="ids-pipeline" style="display:none;">
+                <div style="font-size:0.8rem;color:#94a3b8;margin-bottom:1rem;">Raw PCAP → Feature Engineering → Normalize → ML-Ready Output</div>
+                <div id="pipelineViz"></div>
+                <div class="sim-controls">
+                    <button class="sim-btn sim-btn-green" onclick="runPipeline()">▶ Run Pipeline</button>
+                    <button class="sim-btn sim-btn-gray"  onclick="document.getElementById('pipelineViz').innerHTML=''">🔄 Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     MODAL 3 — GREEN-AI LLM Optimization
+============================================================ -->
+<div class="modal-overlay" id="modal-green" onclick="closeModalOutside(event,'modal-green')">
+    <div class="modal-box">
+        <div class="modal-header">
+            <div>
+                <div class="modal-title">🌱 Sustainable LLM Optimization — GREEN-AI</div>
+                <div class="modal-subtitle">Smart routing · Carbon tracking · Cloud latency optimizer</div>
+            </div>
+            <button class="modal-close" onclick="closeModal('modal-green')">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="sim-tabs">
+                <button class="sim-tab active" id="green-tab-router" onclick="greenTab('router')">🔀 Smart Router</button>
+                <button class="sim-tab" id="green-tab-carbon" onclick="greenTab('carbon')">🌍 Carbon Tracker</button>
+                <button class="sim-tab" id="green-tab-cloud"  onclick="greenTab('cloud')">☁️ Cloud Optimizer</button>
+            </div>
+
+            <!-- Router -->
+            <div id="green-router">
+                <div class="green-dashboard">
+                    <div class="green-metric">
+                        <div class="green-metric-val" id="g-queries" style="color:#22d3ee;">0</div>
+                        <div class="green-metric-label">Total Queries</div>
+                    </div>
+                    <div class="green-metric">
+                        <div class="green-metric-val" id="g-light" style="color:#22c55e;">0%</div>
+                        <div class="green-metric-label">→ DistilGPT</div>
+                    </div>
+                    <div class="green-metric">
+                        <div class="green-metric-val" id="g-heavy" style="color:#ef4444;">0%</div>
+                        <div class="green-metric-label">→ GPT-4</div>
+                    </div>
+                </div>
+                <div style="font-size:0.78rem;color:#94a3b8;margin-bottom:0.5rem;">📋 Query Routing Log</div>
+                <div class="query-flow" id="queryFlow"></div>
+                <div class="sim-controls">
+                    <button class="sim-btn sim-btn-green" onclick="startRouter()">▶ Auto Route</button>
+                    <button class="sim-btn sim-btn-red"   onclick="stopRouter()">⏹ Stop</button>
+                    <button class="sim-btn sim-btn-blue"  onclick="sendQuery('simple')">💬 Simple Query</button>
+                    <button class="sim-btn sim-btn-red"   onclick="sendQuery('complex')">🧠 Complex Query</button>
+                    <button class="sim-btn sim-btn-gray"  onclick="resetRouter()">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Carbon -->
+            <div id="green-carbon" style="display:none;">
+                <div class="green-dashboard">
+                    <div class="green-metric">
+                        <div class="green-metric-val" id="co2-saved" style="color:#22c55e;">0g</div>
+                        <div class="green-metric-label">CO₂ Saved</div>
+                    </div>
+                    <div class="green-metric">
+                        <div class="green-metric-val" id="co2-total" style="color:#f59e0b;">0g</div>
+                        <div class="green-metric-label">Total Emissions</div>
+                    </div>
+                    <div class="green-metric">
+                        <div class="green-metric-val" id="co2-eff" style="color:#22d3ee;">0%</div>
+                        <div class="green-metric-label">Efficiency Gain</div>
+                    </div>
+                </div>
+                <div style="background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:1rem;margin:1rem 0;">
+                    <div style="font-size:0.78rem;color:#94a3b8;margin-bottom:0.8rem;">CO₂ Emissions per Model per Inference</div>
+                    <div style="display:flex;flex-direction:column;gap:0.7rem;" id="carbonBars"></div>
+                </div>
+                <div class="stat-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">⚡</div>
+                        <div><div class="stat-val" id="energy-val">0 kWh</div><div class="stat-name">Energy Consumed</div></div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">🌳</div>
+                        <div><div class="stat-val" id="trees-val">0</div><div class="stat-name">Tree-hours Equivalent</div></div>
+                    </div>
+                </div>
+                <div class="sim-controls">
+                    <button class="sim-btn sim-btn-green" onclick="startCarbonTrack()">▶ Track Emissions</button>
+                    <button class="sim-btn sim-btn-gray"  onclick="resetCarbon()">🔄 Reset</button>
+                </div>
+            </div>
+
+            <!-- Cloud -->
+            <div id="green-cloud" style="display:none;">
+                <div style="font-size:0.8rem;color:#94a3b8;margin-bottom:1rem;">Real-time latency-based routing to optimal global cloud region</div>
+                <div id="regionGrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:0.7rem;margin-bottom:1rem;"></div>
+                <div style="background:#0f172a;border:1px solid #1e293b;border-radius:8px;padding:1rem;">
+                    <div style="font-size:0.78rem;color:#94a3b8;margin-bottom:0.5rem;">📡 Routing Decisions</div>
+                    <div id="routingLog" style="max-height:130px;overflow-y:auto;font-size:0.72rem;font-family:'Courier New',monospace;"></div>
+                </div>
+                <div class="sim-controls">
+                    <button class="sim-btn sim-btn-green" onclick="startCloudRouter()">▶ Start Optimizer</button>
+                    <button class="sim-btn sim-btn-blue"  onclick="pingRegions()">📡 Ping Regions</button>
+                    <button class="sim-btn sim-btn-gray"  onclick="stopCloudRouter()">⏹ Stop</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+/* ======================================================
+   GENERAL UTILS
+====================================================== */
+function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    document.body.style.overflow = '';
+}
+function closeModalOutside(e, id) {
+    if (e.target.id === id) closeModal(id);
+}
+
+function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+}
+
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.querySelector('#contactName').value.trim();
+    const email = form.querySelector('#contactEmail').value.trim();
+    const subject = form.querySelector('#contactSubject').value.trim() || 'New message from portfolio';
+    const message = form.querySelector('#contactMessage').value.trim();
+    const body = encodeURIComponent(`Name: ${name}\r\nEmail: ${email}\r\n\r\n${message}`);
+    const mailtoLink = `mailto:adinarayan736@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    window.location.href = mailtoLink;
+    const btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<i class="fas fa-check"></i> Opened Mail';
+    btn.style.background = 'linear-gradient(135deg,#22c55e,#16a34a)';
+    setTimeout(() => {
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        btn.style.background = '';
+        form.reset();
+    }, 3000);
+}
+
+/* Scroll reveal */
+const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+/* Back to top */
+window.addEventListener('scroll', () => {
+    document.getElementById('backTop').classList.toggle('show', window.scrollY > 400);
+});
+
+/* Active nav */
+const allSections = document.querySelectorAll('section');
+const allNavLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+    let cur = '';
+    allSections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) cur = s.id; });
+    allNavLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + cur ? 'var(--accent)' : ''; });
+});
+
+/* Particles */
+const particleContainer = document.getElementById('particles');
+for (let i = 0; i < 35; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    p.style.animationDelay = (Math.random() * 12) + 's';
+    p.style.width = p.style.height = (Math.random() * 3 + 1) + 'px';
+    p.style.background = Math.random() > 0.5 ? '#6366f1' : '#22d3ee';
+    particleContainer.appendChild(p);
+}
+
+/* Typed text */
+const typedWords = ['Software Developer','ML Enthusiast','Network Security Researcher','Problem Solver','HPE Intern 🚀'];
+let tWordIdx = 0, tCharIdx = 0, tDeleting = false;
+const typedEl = document.getElementById('typed');
+function typeLoop() {
+    const word = typedWords[tWordIdx];
+    typedEl.textContent = tDeleting ? word.slice(0, --tCharIdx) : word.slice(0, ++tCharIdx);
+    if (!tDeleting && tCharIdx === word.length) { tDeleting = true; setTimeout(typeLoop, 1800); return; }
+    if (tDeleting && tCharIdx === 0) { tDeleting = false; tWordIdx = (tWordIdx + 1) % typedWords.length; }
+    setTimeout(typeLoop, tDeleting ? 55 : 95);
+}
+typeLoop();
+
+/* ======================================================
+   MODAL 1 — NETWORK MONITOR
+====================================================== */
+const NET_NODES = [
+    { id:'firewall', label:'Firewall',  x:50, y:8,  emoji:'🔥', type:'safe'   },
+    { id:'router',   label:'Router',    x:50, y:40, emoji:'🔀', type:'normal' },
+    { id:'srv1',     label:'Server-1',  x:18, y:22, emoji:'🖥',  type:'normal' },
+    { id:'srv2',     label:'Server-2',  x:82, y:22, emoji:'🖥',  type:'normal' },
+    { id:'pc1',      label:'PC-1',      x:10, y:72, emoji:'💻', type:'normal' },
+    { id:'pc2',      label:'PC-2',      x:35, y:78, emoji:'💻', type:'normal' },
+    { id:'pc3',      label:'PC-3',      x:65, y:78, emoji:'💻', type:'normal' },
+    { id:'attacker', label:'Attacker',  x:88, y:72, emoji:'💀', type:'threat' },
+];
+const NET_EDGES = [
+    ['firewall','router'],['router','srv1'],['router','srv2'],
+    ['router','pc1'],['router','pc2'],['router','pc3'],['attacker','router']
+];
+
+let netMonitorInterval = null, netRunning = false, netThreats = 0;
+
+function buildNetwork() {
+    const canvas = document.getElementById('networkCanvas');
+    const svg    = document.getElementById('networkSVG');
+    canvas.querySelectorAll('.net-node').forEach(n => n.remove());
+    svg.innerHTML = '';
+    const cw = canvas.offsetWidth  || 620;
+    const ch = canvas.offsetHeight || 280;
+
+    NET_EDGES.forEach(([a, b]) => {
+        const na = NET_NODES.find(n => n.id === a);
+        const nb = NET_NODES.find(n => n.id === b);
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', na.x / 100 * cw);
+        line.setAttribute('y1', na.y / 100 * ch);
+        line.setAttribute('x2', nb.x / 100 * cw);
+        line.setAttribute('y2', nb.y / 100 * ch);
+        line.setAttribute('stroke', '#1e293b');
+        line.setAttribute('stroke-width', '1.5');
+        line.id = `edge-${a}-${b}`;
+        svg.appendChild(line);
+    });
+
+    NET_NODES.forEach(node => {
+        const el = document.createElement('div');
+        el.className = `net-node net-node-${node.type}`;
+        el.id = `netnode-${node.id}`;
+        el.style.left = `calc(${node.x}% - 24px)`;
+        el.style.top  = `calc(${node.y}% - 24px)`;
+        el.innerHTML  = `${node.emoji}<span class="net-label">${node.label}</span>`;
+        el.title = node.label;
+        canvas.appendChild(el);
+    });
+}
+
+function netLog(msg, type = 'info') {
+    const log = document.getElementById('netLog');
+    const t = new Date().toLocaleTimeString('en',{hour12:false});
+    const div = document.createElement('div');
+    div.className = `log-line log-${type}`;
+    div.textContent = `[${t}] ${msg}`;
+    log.appendChild(div);
+    log.scrollTop = log.scrollHeight;
+}
+
+function startNetMonitor() {
+    if (netRunning) return;
+    netRunning = true;
+    buildNetwork();
+    netLog('Scapy interface eth0 → promiscuous mode ON', 'info');
+    netLog('Isolation Forest loaded — n_estimators=200, contamination=0.05', 'info');
+    netLog('One-Class SVM initialized — kernel=rbf, nu=0.05', 'info');
+    netLog('Ensemble model ready. Monitoring 8 nodes…', 'success');
+
+    let tick = 0;
+    const normals = ['PC-1','PC-2','PC-3','Server-1','Server-2'];
+    netMonitorInterval = setInterval(() => {
+        tick++;
+        const src  = normals[Math.floor(Math.random() * normals.length)];
+        const pkts = Math.floor(Math.random() * 60 + 10);
+        netLog(`Normal: ${src} → Router | ${pkts} pkts/s | score=0.${Math.floor(Math.random()*12+1).toString().padStart(3,'0')} BENIGN`, 'info');
+        if (tick % 3 === 0) {
+            animatePacket('pc1', 'router', '#6366f1');
+        }
+        if (tick % 5 === 0) {
+            netLog(`Anomaly check OK — all nodes normal | uptime ${tick*2}s`, 'success');
+        }
+    }, 2000);
+}
+
+function simulateAttack() {
+    netThreats++;
+    document.getElementById('threatBadge').textContent = `Threats Detected: ${netThreats}`;
+    const attacks = [
+        { name:'SYN Flood',  color:'danger', rate:'9,847 pkts/s' },
+        { name:'ICMP Flood', color:'danger', rate:'45,000 pkts/s' },
+        { name:'Port Scan',  color:'warn',   rate:'2,340 pkts/s' },
+        { name:'DDoS',       color:'danger', rate:'82,000 pkts/s' },
+    ];
+    const atk = attacks[Math.floor(Math.random() * attacks.length)];
+    const ip  = `192.168.${Math.floor(Math.random()*9+90)}.${Math.floor(Math.random()*254+1)}`;
+
+    document.getElementById('netnode-attacker').className = 'net-node net-node-threat';
+    netLog(`⚠ ATTACK: ${atk.name} from ${ip} | Rate: ${atk.rate}`, atk.color);
+    netLog(`Isolation Forest score: 0.${Math.floor(Math.random()*9+8)}${Math.floor(Math.random()*9)} → ANOMALY`, 'danger');
+    netLog(`One-Class SVM: margin violation → OUTLIER confirmed`, 'danger');
+
+    animatePacket('attacker', 'router', '#ef4444');
+    setTimeout(() => animatePacket('attacker', 'router', '#ef4444'), 300);
+    setTimeout(() => animatePacket('attacker', 'router', '#ef4444'), 600);
+
+    netLog(`Llama 3.1 analyzing… extracting packet features…`, 'llm');
+    setTimeout(() => {
+        netLog(`[LLM] Root-cause: ${atk.name} — IP ${ip} | Confidence: ${(Math.random()*4+93).toFixed(1)}%`, 'llm');
+        netLog(`[LLM] Severity: CRITICAL | Action: Blackhole route ${ip}`, 'llm');
+    }, 1400);
+}
+
+function blockThreats() {
+    document.getElementById('netnode-attacker').className = 'net-node net-node-blocked';
+    const edge = document.getElementById('edge-attacker-router');
+    if (edge) { edge.setAttribute('stroke', '#ef4444'); edge.setAttribute('stroke-dasharray', '4'); }
+    netLog('🛡 Blackhole route activated → DROP all from attacker', 'success');
+    netLog('iptables -A INPUT -s 192.168.x.x -j DROP', 'success');
+    netLog('Threat isolated in 138ms — zero collateral damage ✓', 'success');
+    document.getElementById('threatBadge').style.color = '#22c55e';
+}
+
+function resetNetwork() {
+    clearInterval(netMonitorInterval);
+    netRunning = false;
+    netThreats = 0;
+    document.getElementById('threatBadge').textContent = 'Threats Detected: 0';
+    document.getElementById('threatBadge').style.color = '#ef4444';
+    document.getElementById('netLog').innerHTML = '<div class="log-line log-info">[SYSTEM] Network Monitor initialized — click ▶ Start Monitor</div>';
+    buildNetwork();
+}
+
+function animatePacket(fromId, toId, color) {
+    const canvas = document.getElementById('networkCanvas');
+    const fn = NET_NODES.find(n => n.id === fromId);
+    const tn = NET_NODES.find(n => n.id === toId);
+    if (!fn || !tn) return;
+    const cw = canvas.offsetWidth  || 620;
+    const ch = canvas.offsetHeight || 280;
+    const p = document.createElement('div');
+    p.className = 'packet-dot';
+    p.style.cssText = `background:${color};box-shadow:0 0 8px ${color};left:${fn.x/100*cw}px;top:${fn.y/100*ch}px;`;
+    canvas.appendChild(p);
+    const sx = fn.x/100*cw, sy = fn.y/100*ch, tx = tn.x/100*cw, ty = tn.y/100*ch;
+    let prog = 0;
+    const anim = setInterval(() => {
+        prog += 0.045;
+        if (prog >= 1) { canvas.removeChild(p); clearInterval(anim); return; }
+        p.style.left = (sx + (tx-sx)*prog) + 'px';
+        p.style.top  = (sy + (ty-sy)*prog) + 'px';
+    }, 18);
+}
+
+/* Packet Stream */
+let pktInterval = null;
+function startPacketStream() {
+    const stream = document.getElementById('packetStream');
+    stream.innerHTML = '';
+    const protos  = ['TCP','UDP','ICMP','HTTP','DNS','ARP','TLS'];
+    const ips     = ['192.168.1.10','10.0.0.5','172.16.0.3','192.168.99.1','8.8.8.8','10.10.0.1'];
+    const typeMap = [
+        {l:'BENIGN',    c:'#22c55e'},{l:'BENIGN',    c:'#22c55e'},{l:'BENIGN',c:'#22c55e'},
+        {l:'SUSPICIOUS',c:'#f59e0b'},{l:'MALICIOUS', c:'#ef4444'}
+    ];
+    pktInterval = setInterval(() => {
+        const proto = protos[Math.floor(Math.random()*protos.length)];
+        const src   = ips[Math.floor(Math.random()*ips.length)];
+        const dst   = ips[Math.floor(Math.random()*ips.length)];
+        const type  = typeMap[Math.floor(Math.random()*typeMap.length)];
+        const size  = Math.floor(Math.random()*1400+64);
+        const port  = Math.floor(Math.random()*60000+1024);
+        const div   = document.createElement('div');
+        div.style.cssText = `color:${type.c};margin-bottom:2px;`;
+        div.textContent   = `▸ [${proto}] ${src}:${port} → ${dst} | ${size}B | ${type.l}`;
+        stream.appendChild(div);
+        stream.scrollTop = stream.scrollHeight;
+        if (stream.children.length > 60) stream.removeChild(stream.firstChild);
+    }, 280);
+}
+function stopPacketStream() { clearInterval(pktInterval); }
+
+/* LLM Analysis */
+function runLLMAnalysis(type) {
+    const screen = document.getElementById('llmScreen');
+    const start  = Date.now();
+    document.getElementById('llmTime').textContent = '—';
+    document.getElementById('llmConf').textContent = '—';
+
+    const scenarios = {
+        syn: {
+            title:'SYN Flood Attack',
+            pkts:'9,847 pkts/s | SYN=98.3% | ACK=0.2% | RST=1.5%',
+            findings:[
+                'Massive SYN packet burst from single rogue IP — TCP handshake never completed',
+                'Server connection table exhausted → 94.7% memory usage (CRITICAL)',
+                'Half-open connections: 48,293 — well above threshold of 500',
+                'Signature match: Mirai Botnet variant #4471 (CVE-2023-XXXX)',
+            ],
+            rec:'Deploy SYN cookies + rate-limit to 100 SYN/s + Blackhole 192.168.99.1',
+            conf:`${(Math.random()*3+95).toFixed(1)}%`, sev:'CRITICAL', color:'#ef4444'
+        },
+        port: {
+            title:'TCP Port Scan (Nmap Aggressive)',
+            pkts:'2,340 pkts/s | Sequential ports 1–65535 | TTL=64',
+            findings:[
+                'Full TCP connect scan across all 65535 ports in 28 seconds',
+                'Source rotating via 12 proxy IPs to evade detection',
+                'Open services exposed: 22(SSH), 80(HTTP), 443(HTTPS), 3306(MySQL)',
+                'OS fingerprinting detected — attacker building network map',
+            ],
+            rec:'Enable port knocking, firewall rate-limit to 10 conn/s per IP, IDS alert',
+            conf:`${(Math.random()*3+92).toFixed(1)}%`, sev:'HIGH', color:'#f59e0b'
+        },
+        icmp: {
+            title:'ICMP Amplification Flood (Smurf)',
+            pkts:'45,000 pkts/s | Echo Request | Payload=65507B | Amplification=6.4x',
+            findings:[
+                'Oversized ICMP packets flooding network — bandwidth saturation at 98.2%',
+                'Distributed source: 847 unique source IPs (botnet coordinated)',
+                'Smurf attack pattern — broadcast amplification confirmed',
+                'Network latency spiked from 2ms → 4800ms across all nodes',
+            ],
+            rec:'Block ICMP at perimeter firewall, rate-limit echo to 1 req/s, null-route',
+            conf:`${(Math.random()*3+94).toFixed(1)}%`, sev:'CRITICAL', color:'#ef4444'
+        }
+    };
+
+    const s = scenarios[type];
+    screen.innerHTML = `<div style="color:#a78bfa;">⟳ Llama 3.1 70B — tokenizing ${Math.floor(Math.random()*5000+8000)} features…</div>`;
+
+    let step = 0;
+    const steps = [
+        `→ Running attention mechanism (32 heads × 80 transformer layers)…`,
+        `→ Cross-referencing CVE database (${Math.floor(Math.random()*200+800)} entries)…`,
+        `→ Generating structured threat report…`,
+    ];
+
+    const iv = setInterval(() => {
+        step++;
+        if (step <= steps.length) {
+            screen.innerHTML += `<div style="color:#22d3ee;">${steps[step-1]}</div>`;
+        } else {
+            const elapsed = ((Date.now() - start) / 1000).toFixed(2);
+            document.getElementById('llmTime').textContent = elapsed + 's';
+            document.getElementById('llmConf').textContent = s.conf;
+            screen.innerHTML = `
+<div style="color:#a78bfa;font-weight:700;margin-bottom:0.8rem;">═══ LLAMA 3.1 THREAT REPORT: ${s.title} ═══</div>
+<div style="color:#94a3b8;margin-bottom:0.6rem;">📦 Signature: ${s.pkts}</div>
+<div style="color:#22d3ee;margin-bottom:0.3rem;">🔍 Findings:</div>
+${s.findings.map(f=>`<div style="color:#e2e8f0;padding-left:1rem;margin-bottom:0.2rem;">▸ ${f}</div>`).join('')}
+<br>
+<div style="color:#22c55e;margin-bottom:0.5rem;">✅ Recommendation: ${s.rec}</div>
+<div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+  <span style="color:${s.color};font-weight:700;">⚠ Severity: ${s.sev}</span>
+  <span style="color:#a78bfa;">🎯 Confidence: ${s.conf}</span>
+  <span style="color:#94a3b8;">⏱ Analysis: ${elapsed}s</span>
+</div>`;
+            clearInterval(iv);
+        }
+    }, 700);
+}
+
+/* Tab switcher */
+function netTab(tab) {
+    ['topology','packets','llm'].forEach(t => {
+        document.getElementById(`net-${t}`).style.display = t === tab ? 'block' : 'none';
+        document.getElementById(`net-tab-${t}`).classList.toggle('active', t === tab);
+    });
+}
+
+/* ======================================================
+   MODAL 2 — IDS
+====================================================== */
+const ML_MODELS = [
+    { name:'XGBoost',         acc:99.2, color:'#22c55e' },
+    { name:'Random Forest',   acc:98.7, color:'#22c55e' },
+    { name:'SVM (RBF)',       acc:96.4, color:'#22d3ee' },
+    { name:'KNN (k=5)',       acc:95.1, color:'#22d3ee' },
+    { name:'Decision Tree',   acc:93.8, color:'#f59e0b' },
+    { name:'Naive Bayes',     acc:87.3, color:'#f59e0b' },
+    { name:'Logistic Reg.',   acc:82.6, color:'#ef4444' },
+];
+
+const ATK_TYPES = [
+    { name:'DoS',    count:0, max:500, color:'#ef4444' },
+    { name:'Probe',  count:0, max:300, color:'#f59e0b' },
+    { name:'R2L',    count:0, max:140, color:'#f97316' },
+    { name:'U2R',    count:0, max:70,  color:'#a78bfa' },
+    { name:'Normal', count:0, max:650, color:'#22c55e' },
+];
+
+let detectInterval = null, idsTotal = 0, idsAttacks = 0;
+
+function runBenchmark() {
+    const barsEl  = document.getElementById('modelBars');
+    const cardsEl = document.getElementById('modelCards');
+    barsEl.innerHTML  = '';
+    cardsEl.innerHTML = '';
+
+    ML_MODELS.forEach((m, i) => {
+        const row = document.createElement('div');
+        row.className = 'bar-item';
+        row.innerHTML = `
+            <div class="bar-label">${m.name}</div>
+            <div class="bar-track"><div class="bar-fill" id="mbar-${i}" style="background:${m.color}"></div></div>
+            <div class="bar-val">${m.acc}%</div>`;
+        barsEl.appendChild(row);
+        setTimeout(() => { document.getElementById(`mbar-${i}`).style.width = m.acc + '%'; }, i * 180);
+
+        const card = document.createElement('div');
+        card.className = `model-card${i===0?' winner':''}`;
+        card.innerHTML = `
+            <div class="model-name" style="color:${m.color}">${m.name}</div>
+            <div class="model-score" style="color:${m.color}">${m.acc}%</div>
+            ${i===0?'<div style="color:#22c55e;font-size:0.6rem;margin-top:0.2rem;">👑 WINNER</div>':''}`;
+        cardsEl.appendChild(card);
+    });
+}
+
+function resetBenchmark() {
+    document.getElementById('modelBars').innerHTML  = '';
+    document.getElementById('modelCards').innerHTML = '';
+}
+
+function startDetection() {
+    initAttackBars();
+    const stream   = document.getElementById('attackStream');
+    const allAtks  = [
+        {n:'DoS Hulk',          t:'DoS',    s:'HIGH', c:'#ef4444'},
+        {n:'DoS Slowloris',     t:'DoS',    s:'HIGH', c:'#ef4444'},
+        {n:'Port Scan',         t:'Probe',  s:'MED',  c:'#f59e0b'},
+        {n:'FTP-Patator',       t:'Probe',  s:'MED',  c:'#f59e0b'},
+        {n:'SSH-Patator',       t:'Probe',  s:'MED',  c:'#f59e0b'},
+        {n:'Brute Force (RDP)', t:'R2L',    s:'HIGH', c:'#f97316'},
+        {n:'Rootkit Attempt',   t:'U2R',    s:'CRIT', c:'#a78bfa'},
+        {n:'Normal Traffic',    t:'Normal', s:'SAFE', c:'#22c55e'},
+        {n:'Normal Traffic',    t:'Normal', s:'SAFE', c:'#22c55e'},
+        {n:'Normal Traffic',    t:'Normal', s:'SAFE', c:'#22c55e'},
+    ];
+
+    detectInterval = setInterval(() => {
+        const atk = allAtks[Math.floor(Math.random() * allAtks.length)];
+        const ip  = `${Math.floor(Math.random()*200+10)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*255)}.${Math.floor(Math.random()*254+1)}`;
+        idsTotal++;
+        if (atk.t !== 'Normal') idsAttacks++;
+        document.getElementById('ids-total').textContent   = idsTotal;
+        document.getElementById('ids-attacks').textContent = idsAttacks;
+
+        const div = document.createElement('div');
+        div.className   = 'attack-item';
+        div.style.borderColor = atk.c;
+        div.innerHTML   = `
+            <span style="color:${atk.c};font-weight:600;">${atk.n}</span>
+            <span style="color:#94a3b8;font-size:0.65rem;">${ip}</span>
+            <span class="attack-badge" style="background:${atk.c}22;color:${atk.c};border:1px solid ${atk.c}44;">${atk.s}</span>`;
+        stream.insertBefore(div, stream.firstChild);
+        if (stream.children.length > 18) stream.removeChild(stream.lastChild);
+
+        const a = ATK_TYPES.find(x => x.name === atk.t);
+        if (a) { a.count = Math.min(a.count + Math.floor(Math.random()*6+1), a.max); updateAttackBars(); }
+    }, 550);
+}
+
+function stopDetection() { clearInterval(detectInterval); }
+
+function initAttackBars() {
+    ATK_TYPES.forEach(a => a.count = 0);
+    const el = document.getElementById('attackBars');
+    el.innerHTML = '';
+    ATK_TYPES.forEach((a, i) => {
+        const row = document.createElement('div');
+        row.className = 'bar-item';
+        row.innerHTML = `
+            <div class="bar-label">${a.name}</div>
+            <div class="bar-track"><div class="bar-fill" id="atk-${i}" style="background:${a.color}"></div></div>
+            <div class="bar-val" id="atkv-${i}">0</div>`;
+        el.appendChild(row);
+    });
+}
+
+function updateAttackBars() {
+    ATK_TYPES.forEach((a, i) => {
+        const bar = document.getElementById(`atk-${i}`);
+        const val = document.getElementById(`atkv-${i}`);
+        if (bar) bar.style.width = (a.count / a.max * 100) + '%';
+        if (val) val.textContent = a.count;
+    });
+}
+
+function runPipeline() {
+    const viz   = document.getElementById('pipelineViz');
+    viz.innerHTML = '';
+    const steps = [
+        {label:'📥 Raw PCAP Ingestion',      detail:'Loading network_capture.pcap (2.4 GB) — 2,847,294 packets', color:'#6366f1'},
+        {label:'🔍 Feature Extraction',      detail:'41 features extracted: duration, bytes, flags, protocols, ports…', color:'#22d3ee'},
+        {label:'🧹 Data Cleaning',           detail:'Removed 847 duplicates, filled 12 nulls, encoded 3 categorical fields', color:'#f59e0b'},
+        {label:'📊 Normalization',           detail:'MinMaxScaler applied — all features scaled to [0, 1] range', color:'#a78bfa'},
+        {label:'⚖️ Class Balancing (SMOTE)', detail:'Minority classes upsampled — each class now has ≥ 50,000 samples', color:'#f97316'},
+        {label:'✅ ML-Ready Output',         detail:'X_train: (200000, 41) | X_test: (50000, 41) | 11 attack classes', color:'#22c55e'},
+    ];
+    steps.forEach((s, i) => {
+        setTimeout(() => {
+            const div = document.createElement('div');
+            div.className = 'pipeline-step';
+            div.style.borderColor = s.color;
+            div.innerHTML = `
+                <div>
+                    <div style="font-size:0.82rem;font-weight:700;color:${s.color}">${s.label}</div>
+                    <div style="font-size:0.7rem;color:#94a3b8;margin-top:0.15rem">${s.detail}</div>
+                </div>
+                <div style="color:#22c55e;font-size:0.72rem;white-space:nowrap;margin-left:0.5rem">✓ Done</div>`;
+            viz.appendChild(div);
+        }, i * 650);
+    });
+}
+
+function idsTab(tab) {
+    ['benchmark','detect','pipeline'].forEach(t => {
+        document.getElementById(`ids-${t}`).style.display = t === tab ? 'block' : 'none';
+        document.getElementById(`ids-tab-${t}`).classList.toggle('active', t === tab);
+    });
+}
+
+/* ======================================================
+   MODAL 3 — GREEN-AI
+====================================================== */
+const QUERIES = [
+    {text:'What is 2+2?',                    type:'simple'},
+    {text:'Summarize this short email',       type:'simple'},
+    {text:'Translate: Hello World',           type:'simple'},
+    {text:'What is the capital of India?',    type:'simple'},
+    {text:'Write a poem about recursion',     type:'simple'},
+    {text:'Analyze this 50-page legal doc…',  type:'complex'},
+    {text:'Generate ML architecture for CV',  type:'complex'},
+    {text:'Explain quantum entanglement',     type:'complex'},
+    {text:'Debug this 600-line codebase',     type:'complex'},
+    {text:'Write research paper abstract',    type:'complex'},
+];
+
+let routerInterval = null, routerRunning = false;
+let gQueries = 0, gLight = 0, gHeavy = 0;
+
+function startRouter() {
+    if (routerRunning) return;
+    routerRunning = true;
+    routerInterval = setInterval(() => {
+        const q = QUERIES[Math.floor(Math.random() * QUERIES.length)];
+        processQuery(q);
+    }, 950);
+}
+
+function stopRouter() { routerRunning = false; clearInterval(routerInterval); }
+
+function resetRouter() {
+    stopRouter();
+    gQueries = gLight = gHeavy = 0;
+    document.getElementById('g-queries').textContent = '0';
+    document.getElementById('g-light').textContent   = '0%';
+    document.getElementById('g-heavy').textContent   = '0%';
+    document.getElementById('queryFlow').innerHTML   = '';
+}
+
+function sendQuery(type) {
+    const pool = QUERIES.filter(q => q.type === type);
+    processQuery(pool[Math.floor(Math.random() * pool.length)]);
+}
+
+function processQuery(q) {
+    gQueries++;
+    const isLight = q.type === 'simple';
+    if (isLight) gLight++; else gHeavy++;
+
+    document.getElementById('g-queries').textContent = gQueries;
+    document.getElementById('g-light').textContent   = Math.round(gLight / gQueries * 100) + '%';
+    document.getElementById('g-heavy').textContent   = Math.round(gHeavy / gQueries * 100) + '%';
+
+    const co2  = isLight ? (Math.random()*0.4+0.05).toFixed(2) : (Math.random()*7+3).toFixed(2);
+    const ms   = isLight ? Math.floor(Math.random()*60+15)     : Math.floor(Math.random()*900+350);
+    const model= isLight ? 'DistilGPT' : 'GPT-4';
+    const c    = isLight ? '#22c55e' : '#ef4444';
+
+    const flow = document.getElementById('queryFlow');
+    const item = document.createElement('div');
+    item.className = 'query-item';
+    item.innerHTML = `
+        <span class="query-model-badge ${isLight?'badge-light':'badge-heavy'}">${model}</span>
+        <span style="color:#e2e8f0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">"${q.text}"</span>
+        <span style="color:${c};font-size:0.65rem;white-space:nowrap;">${co2}g CO₂</span>
+        <span style="color:#94a3b8;font-size:0.62rem;white-space:nowrap;margin-left:0.3rem">${ms}ms</span>`;
+    flow.insertBefore(item, flow.firstChild);
+    if (flow.children.length > 14) flow.removeChild(flow.lastChild);
+}
+
+/* Carbon Tracker */
+let carbonInterval = null, totalCO2 = 0, savedCO2 = 0;
+
+function startCarbonTrack() {
+    if (carbonInterval) return;
+    initCarbonBars();
+    const trackModels = [
+        {name:'DistilGPT', perInf:0.28, color:'#22c55e', idx:0},
+        {name:'GPT-2',     perInf:1.40, color:'#f59e0b', idx:1},
+        {name:'GPT-4',     perInf:5.80, color:'#ef4444', idx:2},
+    ];
+    carbonInterval = setInterval(() => {
+        const choice  = Math.random();
+        const model   = choice < 0.55 ? trackModels[0] : choice < 0.80 ? trackModels[1] : trackModels[2];
+        const emitted = model.perInf + (Math.random() * 0.5 - 0.25);
+        const saved   = model.idx === 0 ? trackModels[2].perInf - emitted : 0;
+
+        totalCO2 += Math.max(0, emitted);
+        savedCO2 += Math.max(0, saved);
+        const eff = savedCO2 + totalCO2 > 0 ? Math.round(savedCO2 / (savedCO2 + totalCO2) * 100) : 0;
+
+        document.getElementById('co2-total').textContent  = totalCO2.toFixed(1) + 'g';
+        document.getElementById('co2-saved').textContent  = savedCO2.toFixed(1) + 'g';
+        document.getElementById('co2-eff').textContent    = eff + '%';
+        document.getElementById('energy-val').textContent = (totalCO2 / 450).toFixed(4) + ' kWh';
+        document.getElementById('trees-val').textContent  = (savedCO2 / 21200).toFixed(6);
+
+        const bar = document.getElementById(`co2bar-${model.idx}`);
+        const val = document.getElementById(`co2barv-${model.idx}`);
+        if (bar && val) {
+            const cur = parseFloat(val.textContent) || 0;
+            const nv  = Math.min(cur + Math.abs(emitted), 20);
+            bar.style.width = (nv / 20 * 100) + '%';
+            val.textContent = nv.toFixed(2) + 'g';
+        }
+    }, 750);
+}
+
+function resetCarbon() {
+    clearInterval(carbonInterval);
+    carbonInterval = null;
+    totalCO2 = savedCO2 = 0;
+    ['co2-total','co2-saved','co2-eff'].forEach(id => document.getElementById(id).textContent = id.includes('eff') ? '0%' : '0g');
+    document.getElementById('energy-val').textContent = '0 kWh';
+    document.getElementById('trees-val').textContent  = '0';
+    initCarbonBars();
+}
+
+function initCarbonBars() {
+    const el = document.getElementById('carbonBars');
+    el.innerHTML = '';
+    [{name:'DistilGPT (Light)', color:'#22c55e', idx:0},
+     {name:'GPT-2 (Medium)',    color:'#f59e0b', idx:1},
+     {name:'GPT-4 (Heavy)',     color:'#ef4444', idx:2}].forEach(m => {
+        const div = document.createElement('div');
+        div.style.cssText = 'display:flex;align-items:center;gap:0.5rem;';
+        div.innerHTML = `
+            <span style="color:#94a3b8;font-size:0.7rem;width:145px;flex-shrink:0;">${m.name}</span>
+            <div class="bar-track" style="flex:1;height:8px;">
+                <div class="bar-fill" id="co2bar-${m.idx}" style="background:${m.color};width:0%"></div>
+            </div>
+            <span style="color:${m.color};font-size:0.68rem;width:48px;text-align:right;" id="co2barv-${m.idx}">0g</span>`;
+        el.appendChild(div);
+    });
+}
+
+/* Cloud Optimizer */
+const REGIONS = [
+    {name:'US-East-1',  flag:'🇺🇸', lat:0, color:'#22c55e'},
+    {name:'EU-West-1',  flag:'🇪🇺', lat:0, color:'#22d3ee'},
+    {name:'AP-South-1', flag:'🇮🇳', lat:0, color:'#f59e0b'},
+    {name:'AP-East-1',  flag:'🇯🇵', lat:0, color:'#a78bfa'},
+    {name:'US-West-2',  flag:'🇺🇸', lat:0, color:'#6366f1'},
+    {name:'SA-East-1',  flag:'🇧🇷', lat:0, color:'#ef4444'},
+];
+
+let cloudInterval = null;
+
+function buildRegionGrid() {
+    const grid = document.getElementById('regionGrid');
+    grid.innerHTML = '';
+    REGIONS.forEach((r, i) => {
+        const div = document.createElement('div');
+        div.className = 'region-card';
+        div.id = `region-${i}`;
+        div.innerHTML = `
+            <div style="font-size:1.3rem;">${r.flag}</div>
+            <div style="font-size:0.72rem;font-weight:700;margin:0.2rem 0;">${r.name}</div>
+            <div style="font-size:0.68rem;color:#94a3b8;" id="rlat-${i}">—</div>
+            <div style="font-size:0.65rem;margin-top:0.2rem;" id="rstatus-${i}">Pinging…</div>`;
+        grid.appendChild(div);
+    });
+}
+
+function pingRegions() {
+    buildRegionGrid();
+    REGIONS.forEach((r, i) => {
+        setTimeout(() => {
+            r.lat = Math.floor(Math.random() * 210 + 18);
+            const latEl    = document.getElementById(`rlat-${i}`);
+            const statEl   = document.getElementById(`rstatus-${i}`);
+            const regionEl = document.getElementById(`region-${i}`);
+            const color    = r.lat < 60 ? '#22c55e' : r.lat < 130 ? '#f59e0b' : '#ef4444';
+            if (latEl)    latEl.textContent    = r.lat + ' ms';
+            if (statEl)   { statEl.textContent = r.lat < 60 ? '✅ Fast' : r.lat < 130 ? '⚠ Medium' : '❌ Slow'; statEl.style.color = color; }
+            if (regionEl) regionEl.style.borderColor = color;
+        }, i * 280 + Math.random() * 200);
+    });
+}
+
+function startCloudRouter() {
+    pingRegions();
+    const log = document.getElementById('routingLog');
+    cloudInterval = setInterval(() => {
+        const valid = REGIONS.filter(r => r.lat > 0);
+        if (!valid.length) return;
+        const best  = [...valid].sort((a,b) => a.lat - b.lat)[0];
+        const t     = new Date().toLocaleTimeString('en',{hour12:false});
+        const div   = document.createElement('div');
+        div.style.color = '#22c55e';
+        div.textContent = `[${t}] Query routed → ${best.name} (${best.lat}ms) ✓ OPTIMAL`;
+        log.insertBefore(div, log.firstChild);
+        if (log.children.length > 12) log.removeChild(log.lastChild);
+        // Drift latencies
+        REGIONS.forEach(r => { if (r.lat) r.lat = Math.max(10, r.lat + Math.floor(Math.random()*30-15)); });
+        pingRegions();
+    }, 2200);
+}
+
+function stopCloudRouter() { clearInterval(cloudInterval); }
+
+function greenTab(tab) {
+    ['router','carbon','cloud'].forEach(t => {
+        document.getElementById(`green-${t}`).style.display = t === tab ? 'block' : 'none';
+        document.getElementById(`green-tab-${t}`).classList.toggle('active', t === tab);
+    });
+}
+
+/* Init on load */
+window.addEventListener('load', () => {
+    buildNetwork();
+    buildRegionGrid();
+    initCarbonBars();
+    initAttackBars();
+    runBenchmark();
+});
+</script>
+</body>
+</html>
